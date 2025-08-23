@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1news.uz - Kirish</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #e0f2fe 0%, #f3f4f6 100%);
+    }
+    input:focus {
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+    }
+    button:hover {
+      transform: scale(1.05);
+      transition: transform 0.2s ease;
+    }
+  </style>
+</head>
+<body class="gradient-bg font-sans min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-gray-900 text-white py-4 shadow-lg">
+    <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
+      <div class="flex space-x-4 mb-2 sm:mb-0">
+        <a href="#" class="hover:text-blue-300 transition-colors">о нас</a>
+        <a href="#" class="hover:text-blue-300 transition-colors">редакционная</a>
+        <a href="#" class="hover:text-blue-300 transition-colors">политика</a>
+        <a href="contact.html" class="hover:text-blue-300 transition-colors">контакты</a>
+      </div>
+      <div class="flex space-x-4 mb-2 sm:mb-0">
+        <span class="text-sm">1 USD = 3243.89</span>
+        <span class="text-sm">1 EUR = 3419.18</span>
+        <span class="text-sm">1 RUB = 53.48</span>
+      </div>
+      <div class="flex space-x-2">
+        <a href="#" class="hover:text-blue-300 transition-colors">En</a>
+        <a href="#" class="hover:text-blue-300 transition-colors">Ru</a>
+        <a href="#" class="hover:text-blue-300 transition-colors">Uz</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="bg-white py-3 shadow">
+    <div class="container mx-auto px-4">
+      <ul class="flex flex-wrap space-x-4 text-sm">
+        <li><a href="index.html" class="hover:text-blue-600 transition-colors">Главная</a></li>
+        <li><a href="category.html" class="hover:text-blue-600 transition-colors">экономика</a></li>
+        <li><a href="category.html" class="hover:text-blue-600 transition-colors">политика</a></li>
+        <li><a href="category.html" class="hover:text-blue-600 transition-colors">общество</a></li>
+        <li><a href="category.html" class="hover:text-blue-600 transition-colors">культура</a></li>
+        <li><a href="category.html" class="hover:text-blue-600 transition-colors">спорт</a></li>
+        <li><a href="category.html" class="hover:text-blue-600 transition-colors">в мире</a></li>
+        <li><a href="category.html" class="hover:text-blue-600 transition-colors">нно</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Login Form -->
+  <section class="container mx-auto px-4 py-12 flex-grow">
+    <div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg fade-in">
+      <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Tizimga kirish</h2>
+      <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+        <div class="mb-5">
+          <label for="email" class="block text-gray-700 mb-2 font-medium">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email kiriting"
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
+            required
+          />
+          <p id="emailError" class="text-red-500 text-sm mt-2 hidden fade-in">Noto‘g‘ri email format!</p>
+        </div>
+        <div class="mb-5">
+          <label for="phone" class="block text-gray-700 mb-2 font-medium">Telefon raqami</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+998901234567"
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
+            required
+          />
+          <p id="phoneError" class="text-red-500 text-sm mt-2 hidden fade-in">Telefon raqami noto‘g‘ri!</p>
+        </div>
+        <div class="mb-5">
+          <label for="password" class="block text-gray-700 mb-2 font-medium">Parol</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Parol kiriting"
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
+            required
+          />
+          <p id="passwordError" class="text-red-500 text-sm mt-2 hidden fade-in">Parol kamida 6 belgi bo‘lishi kerak!</p>
+        </div>
+        <button
+          type="submit"
+          id="loginButton"
+          class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 flex items-center justify-center transition-colors"
+        >
+          <span id="loginText">Kod yuborish</span>
+          <svg id="loginSpinner" class="animate-spin h-5 w-5 mr-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </button>
+      </form>
+      <p class="mt-6 text-center text-gray-600">
+        Akkauntingiz yo‘qmi? <a href="register.html" class="text-blue-600 hover:underline font-medium">Ro‘yxatdan o‘ting</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-4 shadow-lg">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col sm:flex-row justify-between">
+        <div class="flex space-x-4 mb-2 sm:mb-0">
+          <a href="#" class="hover:text-blue-300 transition-colors">о нас</a>
+          <a href="contact.html" class="hover:text-blue-300 transition-colors">контакты</a>
+          <a href="#" class="hover:text-blue-300 transition-colors">редакционная</a>
+          <a href="#" class="hover:text-blue-300 transition-colors">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
+          <a href="#" class="hover:text-blue-300 transition-colors">СОГЛАШЕНИЕ</a>
+        </div>
+        <div>
+          <p>© COPYRIGHT 2017 BY md</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function handleLoginSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const password = document.getElementById('password').value;
+      const emailError = document.getElementById('emailError');
+      const phoneError = document.getElementById('phoneError');
+      const passwordError = document.getElementById('passwordError');
+      const loginButton = document.getElementById('loginButton');
+      const loginText = document.getElementById('loginText');
+      const loginSpinner = document.getElementById('loginSpinner');
+
+      // Reset errors
+      emailError.classList.add('hidden');
+      phoneError.classList.add('hidden');
+      passwordError.classList.add('hidden');
+
+      // Validation
+      let isValid = true;
+      if (!email.includes('@') || !email.includes('.')) {
+        emailError.classList.remove('hidden');
+        isValid = false;
+      }
+      if (!phone.match(/^\+998[0-9]{9}$/)) {
+        phoneError.classList.remove('hidden');
+        isValid = false;
+      }
+      if (password.length < 6) {
+        passwordError.classList.remove('hidden');
+        isValid = false;
+      }
+
+      if (!isValid) return;
+
+      // Simulate SMS code generation
+      const smsCode = Math.floor(100000 + Math.random() * 900000); // 6 xonali kod
+      console.log('Generated SMS Code:', smsCode);
+      sessionStorage.setItem('smsCode', smsCode); // Kodni saqlash
+      console.log('Login Data:', { email, phone, password });
+
+      // Simulate API call
+      loginButton.disabled = true;
+      loginText.classList.add('hidden');
+      loginSpinner.classList.remove('hidden');
+
+      setTimeout(() => {
+        // Backend API integratsiyasi uchun joy
+        // Masalan: fetch('/api/login', { method: 'POST', body: JSON.stringify({ email, phone, password }) })
+        alert('SMS kod yuborildi! Konsolda kodni tekshiring.');
+        window.location.href = 'verify.html'; // Verify sahifasiga yo‘naltirish
+        loginButton.disabled = false;
+        loginText.classList.remove('hidden');
+        loginSpinner.classList.add('hidden');
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
